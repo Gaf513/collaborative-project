@@ -49,3 +49,4 @@ let House = sprites.create(img`
     ......bcccbbbcbbe3b33b33b33b33bebbcbbbcccb......
     `, SpriteKind.Player)
 tiles.placeOnTile(House, tiles.getTileLocation(3, 2))
+tiles.setCurrentTilemap(tilemap`level1`)
