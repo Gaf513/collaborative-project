@@ -164,7 +164,6 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
-let gameDifficulty = game.askForString("Select a difficulty: easy, medium, or hard")
 Level_1(15, 25)
 forever(function () {
     characterAnimations.loopFrames(
