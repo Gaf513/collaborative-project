@@ -2,7 +2,9 @@
     "name": "Our Awesome Project",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
+        "animation": "*"
     },
     "files": [
         "main.blocks",
