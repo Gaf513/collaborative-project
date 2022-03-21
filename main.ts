@@ -134,7 +134,7 @@ function Level_3 (Amount_of_Villain_3: number, Villain_3_Speed: number) {
             `, SpriteKind.Enemy)
         tiles.placeOnTile(Villain_3, tiles.getTileLocation(15, 15))
         Villain_3.follow(House, Villain_3_Speed)
-        pause(3000)
+        pause(1000)
     }
 }
 let Villain_3: Sprite = null
@@ -164,7 +164,6 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
-Level_1(15, 25)
 forever(function () {
     characterAnimations.loopFrames(
     mySprite,
