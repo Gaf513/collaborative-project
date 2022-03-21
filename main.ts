@@ -6,6 +6,56 @@ enum ActionKind {
 namespace SpriteKind {
     export const Tower = SpriteKind.create()
 }
+function Level_2 (Amount_of_Enemy_2: number, Villain_2_Speed: number) {
+    for (let index = 0; index < Amount_of_Enemy_2; index++) {
+        Villain_2 = sprites.create(img`
+            . . . . c c c c c . . . . . . . 
+            . . c c 5 5 5 5 5 c . . . . . . 
+            . c 5 5 5 5 1 f 5 5 c . . . . . 
+            c 5 5 5 5 5 f f 5 5 5 c . . . . 
+            c 5 5 5 5 5 5 5 5 5 5 5 c . . . 
+            c c b b 1 b 5 5 5 5 5 5 c . . . 
+            c 5 3 3 3 5 5 5 5 5 5 5 d c . . 
+            c 5 5 5 5 5 5 5 5 5 d d d c . . 
+            . c 5 5 5 5 b 5 5 5 d d d c . . 
+            . . c b b c 5 5 b d d d d c . . 
+            . c b b c 5 5 b b d d d d c c . 
+            . c c c c c b b d d d d d d c c 
+            . . . c c 5 5 b 5 5 d d d d d c 
+            . . . . c b 5 5 b b c c c c c c 
+            . . . . c c c c c c . . . . . . 
+            . . . . . c b b b c . . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(Villain_2, tiles.getTileLocation(15, 15))
+        Villain_2.follow(House, Villain_2_Speed)
+        pause(3000)
+    }
+}
+function Level_1 (NumberofVillains: number, Villain_Speed: number) {
+    for (let index = 0; index < NumberofVillains; index++) {
+        Villain1 = sprites.create(img`
+            . . . . . c c c c c c c . . . . 
+            . . . . c 6 7 7 7 7 7 6 c . . . 
+            . . . c 7 c 6 6 6 6 c 7 6 c . . 
+            . . c 6 7 6 f 6 6 f 6 7 7 c . . 
+            . . c 7 7 7 7 7 7 7 7 7 7 c . . 
+            . . f 7 8 1 f f 1 6 7 7 7 f . . 
+            . . f 6 f 1 f f 1 f 7 7 7 f . . 
+            . . . f f 2 2 2 2 f 7 7 6 f . . 
+            . . c c f 2 2 2 2 7 7 6 f c . . 
+            . c 7 7 7 7 7 7 7 7 c c 7 7 c . 
+            c 7 1 1 1 7 7 7 7 f c 6 7 7 7 c 
+            f 1 1 1 1 1 7 6 f c c 6 6 6 c c 
+            f 1 1 1 1 1 1 6 6 c 6 6 6 c . . 
+            f 6 1 1 1 1 1 6 6 6 6 6 6 c . . 
+            . f 6 1 1 1 1 1 6 6 6 6 c . . . 
+            . . f f c c c c c c c c . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(Villain1, tiles.getTileLocation(15, 15))
+        Villain1.follow(House, Villain_Speed)
+        pause(5000)
+    }
+}
 function setHome () {
     House = sprites.create(img`
         ....................8a8aa8a8....................
@@ -62,8 +112,36 @@ function setHome () {
     statusbar.attachToSprite(House)
     statusbar.setBarBorder(1, 15)
 }
+function Level_3 (Amount_of_Villain_3: number, Villain_3_Speed: number) {
+    for (let index = 0; index < Amount_of_Villain_3; index++) {
+        Villain_3 = sprites.create(img`
+            . . f f f . . . . . . . . . . . 
+            f f f c c . . . . . . . . f f f 
+            f f c c c . c c . . . f c b b c 
+            f f c 3 c c 3 c c f f b b b c . 
+            f f c 3 b c 3 b c f b b c c c . 
+            f c b b b b b b c f b c b c c . 
+            c c 1 b b b 1 b c b b c b b c . 
+            c b b b b b b b b b c c c b c . 
+            c b 1 f f 1 c b b c c c c c . . 
+            c f 1 f f 1 f b b b b f c . . . 
+            f f f f f f f b b b b f c . . . 
+            f f 2 2 2 2 f b b b b f c c . . 
+            . f 2 2 2 2 2 b b b c f . . . . 
+            . . f 2 2 2 b b b c f . . . . . 
+            . . . f f f f f f f . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(Villain_3, tiles.getTileLocation(15, 15))
+        Villain_3.follow(House, Villain_3_Speed)
+        pause(3000)
+    }
+}
+let Villain_3: Sprite = null
 let statusbar: StatusBarSprite = null
+let Villain1: Sprite = null
 let House: Sprite = null
+let Villain_2: Sprite = null
 tiles.setCurrentTilemap(tilemap`level1`)
 setHome()
 let mySprite = sprites.create(img`
@@ -86,6 +164,8 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
+let gameDifficulty = game.askForString("Select a difficulty: easy, medium, or hard")
+Level_1(15, 25)
 forever(function () {
     characterAnimations.loopFrames(
     mySprite,
