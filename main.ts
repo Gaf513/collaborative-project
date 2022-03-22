@@ -8,8 +8,11 @@ namespace SpriteKind {
     export const info = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (selector.y == 63) {
-        selector.setPosition(80, 48)
+    if (selecting == true) {
+        if (selector.y == 63) {
+            selector.setPosition(80, 48)
+            levelType = "Medium"
+        }
     }
 })
 function forLater () {
@@ -71,25 +74,117 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
             `, SpriteKind.info)
         selector.setPosition(40, 48)
+        animation.runImageAnimation(
+        selector,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        500,
+        true
+        )
+        levelType = "Easy"
+        pause(1000)
+        selecting = true
+    } else if (selecting == true) {
+        selector.destroy()
+        game.splash(levelType)
+        selecting = false
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (selector.x == 120) {
-        selector.setPosition(80, 48)
-    } else if (selector.x == 80) {
-        selector.setPosition(40, 48)
+    if (selecting == true) {
+        if (selector.x == 120) {
+            selector.setPosition(80, 48)
+            levelType = "Medium"
+        } else if (selector.x == 80) {
+            selector.setPosition(40, 48)
+            levelType = "Easy"
+        }
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (selector.x == 40) {
-        selector.setPosition(80, 48)
-    } else if (selector.x == 80) {
-        selector.setPosition(120, 48)
+    if (selecting == true) {
+        if (selector.x == 40) {
+            selector.setPosition(80, 48)
+            levelType = "Medium"
+        } else if (selector.x == 80) {
+            selector.setPosition(120, 48)
+            levelType = "Hard"
+        }
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (selector.y == 48) {
-        selector.setPosition(80, 63)
+    if (selecting == true) {
+        if (selector.y == 48) {
+            selector.setPosition(80, 63)
+            levelType = "Impossible"
+        }
     }
 })
 function setHome () {
@@ -156,7 +251,9 @@ let mediumButton: TextSprite = null
 let easyButton: TextSprite = null
 let difficultyMenuOn = false
 let mySprite: Sprite = null
+let levelType = ""
 let selector: Sprite = null
+let selecting = false
 let gameMenuOn = false
 let pressAStart: TextSprite = null
 let textSprite: TextSprite = null
@@ -166,6 +263,7 @@ textSprite.setPosition(80, 50)
 pressAStart = textsprite.create("Press A to Start")
 pressAStart.setPosition(80, 60)
 gameMenuOn = true
+selecting = false
 forever(function () {
     characterAnimations.loopFrames(
     mySprite,
