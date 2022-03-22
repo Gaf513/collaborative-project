@@ -12,6 +12,7 @@ function instructions () {
     game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
     game.splash("Press A to attack your enemy")
     game.splash("Press B to use your special attack")
+    game.splash("Make it through all the levels and you win. If your home gets destroyed you lose.")
     game.splash("Good Luck!")
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
