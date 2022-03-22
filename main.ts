@@ -8,7 +8,7 @@ namespace SpriteKind {
     export const info = SpriteKind.create()
 }
 function instructions () {
-    game.splash("Welcome to Defend the Home! Your goal to to protect your home from invaders hell ben ton destroying it. Press A to learn how to play.")
+    game.splash("Welcome to Defend the Home! Your goal to to protect your home from invaders hell bent on destroying it. Press A to learn how to play.")
     game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
     game.splash("Press A to attack your enemy")
     game.splash("Press B to use your special attack")
