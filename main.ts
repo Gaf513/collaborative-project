@@ -12,7 +12,7 @@ function instructions () {
     game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
     game.splash("Press A to attack your enemy")
     game.splash("Press B to use your special attack")
-    game.splash("Good Luck")
+    game.splash("Good Luck!")
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
