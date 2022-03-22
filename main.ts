@@ -7,6 +7,13 @@ namespace SpriteKind {
     export const Tower = SpriteKind.create()
     export const info = SpriteKind.create()
 }
+function instructions () {
+    game.splash("Welcome to Defend the Home! Your goal to to protect your home from invaders hell ben ton destroying it. Press A to learn how to play.")
+    game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
+    game.splash("Press A to attack your enemy")
+    game.splash("Press B to use your special attack")
+    game.splash("Good Luck")
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
         if (selector.y == 63) {
@@ -153,17 +160,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         selecting = true
     } else if (selecting == true) {
         selector.destroy()
-        game.splash(levelType)
         selecting = false
+        easyButton.destroy()
+        mediumButton.destroy()
+        hardButton.destroy()
+        impossibleButton.destroy()
+        instructions()
     }
 })
-function Instructions () {
-    game.splash("Welcome to Defend the Home! Your goal to to protect your home from invaders hell ben ton destroying it. Press A to learn how to play.")
-    game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
-    game.splash("Press A to attack your enemy")
-    game.splash("Press B to use your special attack")
-    game.splash("Good Luck")
-}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
         if (selector.x == 120) {
