@@ -6,10 +6,9 @@ enum ActionKind {
 namespace SpriteKind {
     export const Tower = SpriteKind.create()
     export const info = SpriteKind.create()
+    export const Boss = SpriteKind.create()
 }
-let spawnNumber = 0
 function enemySpawn (level: number) {
-    levelText = textsprite.create("Level" + level)
     for (let index = 0; index <= spawnNumber; index++) {
         enemySnake = sprites.create(img`
             . . . . . c c c c c c c . . . . 
@@ -28,8 +27,9 @@ function enemySpawn (level: number) {
             f 6 1 1 1 1 1 6 6 6 6 6 6 c . . 
             . f 6 1 1 1 1 1 6 6 6 6 c . . . 
             . . f f c c c c c c c c . . . . 
-            `, SpriteKind.Player)
+            `, SpriteKind.Enemy)
         enemySnake.follow(House, 25)
+        tiles.placeOnRandomTile(enemySnake, assets.tile`myTile`)
         if (index == 0) {
             enemyBat = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
@@ -50,8 +50,9 @@ function enemySpawn (level: number) {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Enemy)
             enemyBat.follow(House, 50)
+            tiles.placeOnRandomTile(enemyBat, assets.tile`myTile`)
         } else {
-            enemyDinosaur = sprites.create(img`
+            enemyDuck = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . c c c c . . . . . . . . 
                 . . c c 5 5 5 5 c c . . . . . . 
@@ -69,16 +70,88 @@ function enemySpawn (level: number) {
                 . . c b b c c c 5 5 b c c . . . 
                 . . c c c c c d 5 5 c . . . . . 
                 `, SpriteKind.Enemy)
-            enemyDinosaur.follow(House, 20)
+            enemyDuck.follow(House, 20)
+            tiles.placeOnRandomTile(enemyDuck, assets.tile`myTile`)
         }
+        pause(1000)
     }
+    enemyDuck = sprites.create(img`
+        . . . b 5 b . . . . . . . . . . 
+        . . . . b 5 b . . . . . . . . . 
+        . . . . b b b b b b . . . . . . 
+        . . . b 5 5 5 5 5 b b . . . . . 
+        . . f d 5 5 f 1 d 5 b b . . . . 
+        . . c 4 d 5 f f 1 5 5 b . . . . 
+        . . 4 4 d d b f d 5 5 b . . . . 
+        b 4 4 4 4 4 5 5 5 5 5 d b b b . 
+        . b 4 4 4 4 4 5 5 d b b d d d b 
+        . . b 5 5 5 5 5 5 b 5 5 5 d b b 
+        . b 5 5 5 5 5 5 d 5 5 5 5 c d c 
+        . b 5 5 5 5 5 5 b 5 5 d c d b c 
+        . b d 5 5 5 5 5 d b c c d d c . 
+        . . b b 5 5 5 d d d d d b c . . 
+        . . . b b c c c c c c c c . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Boss)
+    enemyDuck.follow(House, 20)
+    tiles.placeOnRandomTile(enemyDuck, assets.tile`myTile`)
 }
 function instructions () {
-    game.splash("Welcome to Defend the Home! Your goal to to protect your home from invaders hell bent on destroying it. Press A to learn how to play.")
-    game.splash("Use the arrow keys to move around to hunt down and catch you enemies")
-    game.splash("Press A to attack your enemy")
-    game.splash("Press B to use your special attack")
-    game.splash("Good Luck!")
+    game.setDialogFrame(img`
+        111111111111111111111111111111111111111111111111
+        111199911111111111119991111111111111999111111111
+        119999999111999911999999911199991199999991119991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199999999999999999999999999999999999999999999991
+        199699999999999999999999999999999999999996999991
+        199699999999699999999999999999999969999966999991
+        199669999999669999999999999999999969999996999691
+        166699999999699999999999999699999966999966699691
+        196669999996669999699999999699999669999966996691
+        199666999999699999699999996669999966999666699691
+        166699999966666999669999996699999966699966996661
+        196666999966669996666999966666996669999666696691
+        196666999966669999669999996699999666999666666661
+        166669999666666996666999966666996666966666666669
+        196699996666669996666999666669996666666666666669
+        966666699666666666666666666666666666666666666669
+        966666996666666666666666666666666666666666666669
+        966666666666666666666666666666666666666666666669
+        999999999999999999999999999999999999999999999999
+        `)
+    game.showLongText("Welcome to Defend the Home! Your goal to to protect your home from invaders hell bent on destroying it.", DialogLayout.Full)
+    game.showLongText("Use the arrow keys to move around to hunt down and catch you enemies", DialogLayout.Full)
+    game.showLongText("Press A to attack your enemy", DialogLayout.Full)
+    game.showLongText("Press B to use your special attack", DialogLayout.Full)
+    game.showLongText("Good Luck!", DialogLayout.Full)
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
@@ -88,6 +161,17 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function enemyLevelSpawn () {
+    if (levelType == "Easy") {
+        spawnNumber = 10
+    } else if (levelType == "Medium") {
+        spawnNumber = 20
+    } else if (levelType == "Hard") {
+        spawnNumber = 30
+    } else if (levelType == "Impossible") {
+        spawnNumber = 100
+    }
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (gameMenuOn == true) {
         gameMenuOn = false
@@ -230,6 +314,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(mySprite)
         scene.cameraFollowSprite(mySprite)
         mySprite.setPosition(55, 65)
+        enemyLevelSpawn()
+        enemySpawn(1)
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -327,11 +413,11 @@ let easyButton: TextSprite = null
 let difficultyMenuOn = false
 let levelType = ""
 let selector: Sprite = null
-let enemyDinosaur: Sprite = null
+let enemyDuck: Sprite = null
 let enemyBat: Sprite = null
 let House: Sprite = null
 let enemySnake: Sprite = null
-let levelText: TextSprite = null
+let spawnNumber = 0
 let selecting = false
 let gameMenuOn = false
 let pressAStart: TextSprite = null
