@@ -9,6 +9,7 @@ namespace SpriteKind {
     export const Boss = SpriteKind.create()
 }
 function enemySpawn (level: number) {
+    game.splash("Level " + level)
     for (let index = 0; index <= spawnNumber; index++) {
         enemySnake = sprites.create(img`
             . . . . . c c c c c c c . . . . 
@@ -30,7 +31,7 @@ function enemySpawn (level: number) {
             `, SpriteKind.Enemy)
         enemySnake.follow(House, 25)
         tiles.placeOnRandomTile(enemySnake, assets.tile`myTile`)
-        if (index == 0) {
+        if (index % 2 == 0) {
             enemyBat = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . c c . . c c . . . . . . . . 
@@ -52,7 +53,7 @@ function enemySpawn (level: number) {
             enemyBat.follow(House, 50)
             tiles.placeOnRandomTile(enemyBat, assets.tile`myTile`)
         } else {
-            enemyDuck = sprites.create(img`
+            enemyDino = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . c c c c . . . . . . . . 
                 . . c c 5 5 5 5 c c . . . . . . 
@@ -70,10 +71,10 @@ function enemySpawn (level: number) {
                 . . c b b c c c 5 5 b c c . . . 
                 . . c c c c c d 5 5 c . . . . . 
                 `, SpriteKind.Enemy)
-            enemyDuck.follow(House, 20)
-            tiles.placeOnRandomTile(enemyDuck, assets.tile`myTile`)
+            enemyDino.follow(House, 20)
+            tiles.placeOnRandomTile(enemyDino, assets.tile`myTile`)
         }
-        pause(1000)
+        pause(4000)
     }
     enemyDuck = sprites.create(img`
         . . . b 5 b . . . . . . . . . . 
@@ -161,6 +162,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+// The purpose of this function is to set the number of enemies you face dependinh on the difficulty selectd. Once the variable is set it is called, or returned to the enemy spawn function where it dictates how many enemies the main character faces
 function enemyLevelSpawn () {
     if (levelType == "Easy") {
         spawnNumber = 10
@@ -319,6 +321,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         start = true
     }
 })
+sprites.onDestroyed(SpriteKind.Boss, function (sprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    enemySpawn(2)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
         if (selector.x == 120) {
@@ -329,6 +335,13 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
             levelType = "Easy"
         }
     }
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Tower, function (sprite, otherSprite) {
+    statusbar.value += -10
+    sprite.destroy()
+})
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    game.over(false)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selecting == true) {
@@ -416,6 +429,7 @@ let difficultyMenuOn = false
 let levelType = ""
 let selector: Sprite = null
 let enemyDuck: Sprite = null
+let enemyDino: Sprite = null
 let enemyBat: Sprite = null
 let House: Sprite = null
 let enemySnake: Sprite = null
