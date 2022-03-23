@@ -321,6 +321,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         start = true
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 sprites.onDestroyed(SpriteKind.Boss, function (sprite) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     enemySpawn(2)
@@ -418,6 +421,9 @@ function setHome () {
     statusbar.attachToSprite(House)
     statusbar.setBarBorder(1, 15)
 }
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 let statusbar: StatusBarSprite = null
 let start = false
 let mySprite: Sprite = null
