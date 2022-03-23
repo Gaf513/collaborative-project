@@ -316,6 +316,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mySprite.setPosition(55, 65)
         enemyLevelSpawn()
         enemySpawn(1)
+        start = true
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -405,6 +406,7 @@ function setHome () {
     statusbar.setBarBorder(1, 15)
 }
 let statusbar: StatusBarSprite = null
+let start = false
 let mySprite: Sprite = null
 let impossibleButton: TextSprite = null
 let hardButton: TextSprite = null
