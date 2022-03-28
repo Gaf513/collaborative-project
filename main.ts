@@ -316,10 +316,32 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(mySprite)
         scene.cameraFollowSprite(mySprite)
         mySprite.setPosition(55, 65)
+        shoot = true
         enemyLevelSpawn()
         enemySpawn(1)
-        start = true
+    } else {
+        dart0 = sprites.createProjectileFromSprite(img`
+            . . . . . . . c d . . . . . . . 
+            . . . . . . . c d . . . . . . . 
+            . . . . . . . c d . . . . . . . 
+            . . . . . . . c b . . . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . c 4 . . . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . e 4 . . . . . . . 
+            . . . . . . e e 5 2 . . . . . . 
+            . . . . . . e 4 5 2 . . . . . . 
+            . . . . . c c c 2 2 2 . . . . . 
+            . . . . e e 4 4 4 5 2 2 . . . . 
+            . . e f f f c c 2 2 f f 2 2 . . 
+            . e e e e 2 2 4 4 4 4 5 4 2 2 . 
+            e e e e e e 2 2 4 4 4 5 4 4 2 2 
+            e e e e e e 2 2 4 4 4 4 5 4 2 2 
+            `, mySprite, 0, -50)
     }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, otherSprite) {
+    otherSprite.destroy()
 })
 sprites.onDestroyed(SpriteKind.Boss, function (sprite) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -418,8 +440,12 @@ function setHome () {
     statusbar.attachToSprite(House)
     statusbar.setBarBorder(1, 15)
 }
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 let statusbar: StatusBarSprite = null
-let start = false
+let dart0: Sprite = null
+let shoot = false
 let mySprite: Sprite = null
 let impossibleButton: TextSprite = null
 let hardButton: TextSprite = null
